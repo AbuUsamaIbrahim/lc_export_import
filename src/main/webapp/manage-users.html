@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LC Export Import</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/datepicker.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<header>
+    <div class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="logo t-center">
+                        <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="user-welcome-part float-right d-flex">
+                        <p id="pUser">Hello, User</p>
+                        <form action="">
+                            <a href="#" onclick="logout()" class="btn btn-primary btn-sm">Log Out</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-menu"></div>
+</header>
+<!-- Header-Area-End
+    ================================= -->
+<main>
+    <div class="dashboard-area">
+        <div class="container-fluid" style="padding-left:0; padding-right:0;">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+                    <div class="dashboard-left-area">
+                        <div class="dashboard-nav">
+                            <div id="myDIV">
+                                <ul>
+                                    <li class="dbbtn">
+                                        <a href="bank.html"><i class="fa fa-bank"></i>
+                                            Bank</a>
+                                    </li>
+                                    <li class="dbbtn">
+                                        <a href="branch.html"><i class="fas fa-bank"></i>
+                                            Branch</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="customer.html"><i class="fa fa-user"></i>
+                                            Customer</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="goods.html"><i class="fa fa-product-hunt"></i>
+                                            Goods</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="sales.html"><i class="fa fa-shopping-cart"></i>
+                                            Sales</a>
+                                    </li>
+
+                                    <li class="dbbtn dbactive">
+                                        <a href="manage-users.html"><i class="fas fa-user-tie"></i>
+                                            Manage Users</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">-->
+                <!--          <div class="right-side-dashboard-content">-->
+                <!--            <div class="dashboard-content">-->
+                <!--              <div class="single-dashboard-content">-->
+                <!--                <div class="query-cotent">-->
+                <div class="container">
+                    <div class="query-date-area">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 style="color: #000; margin-bottom: 20px; margin-top: 10px;">User Managment</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" onclick="showModal(null)">
+                                    Add New
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="resultContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--          </div>-->
+            <!--        </div>-->
+            <!--      </div>-->
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <row>
+                            <div class="col-md-12">
+                                <div class="manage-user-popup-form">
+                                    <form action="" method="POST">
+                                        <input type="hidden" id="id">
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    <span>User Name</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" id="lname" class="form-control"
+                                                               placeholder="Enter Name">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <span>Email</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="email" id="email" class="form-control"
+                                                               placeholder="Enter Email">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <span>Password</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="password" id="password" class="form-control"
+                                                               placeholder="Enter Password">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!-- admin-checkbox -->
+                                        <div class="admin-checkbox d-none">
+                                            <table>
+                                                <tr>
+                                                    <td><input id="isAdmin" type="checkbox" value="false"></td>
+                                                    <td><span>Admin</span></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- popup-save-cancel-btn
+                                        <div class="popup-save-cancel-btn text-right">
+                                          <td>
+                                              <div class="action-btn">
+                                                <button type="button" class="btn btn-success">Save</button>
+                                                <button type="button" class="btn btn-warning">Delete</button>
+                                              </div>
+                                            </td>
+                                        </div>
+                                        -->
+                                    </form>
+                                </div>
+                            </div>
+                        </row>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="addUser();">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer>
+    <div class="d-flex justify-content-center" style=" padding-top: 33px;">Developed By, Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">All Rights Reserved and Copyright © 2018 by Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">Web: www.pacificsoft-tech.com</div>
+</footer>
+
+
+<script src="assets/js/jquery-1.12.4.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-datepicker.js"></script>
+<script src="assets/js/jquery.meanmenu.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="assets/js/customjs/common.js"></script>
+
+
+<script>
+    var rootPath = basicUrl + '/api/v1/users';
+    var userList = [];
+    var selectedUserId = 0;
+    var user_info;
+    var dt;
+    $(document).ready(function () {
+        user_info = JSON.parse(window.localStorage.getItem('user_info'));
+        if (user_info == null) {
+            window.location = 'index.html';
+        }
+        $('#pUser').html(user_info.name);
+        getAllUser();
+    });
+
+    function showModal(user) {
+        if (user != null && user.email == 'admin@abc.com') {
+            alert('Admin User is not editable');
+            return;
+        } else if (user == null) {
+            $("#exampleModalLabel").html("Add User");
+            $("#email").prop("readonly", false);
+            $("#lname").prop("readonly", false);
+            selectedUserId = 0;
+            $("#id").val("");
+            $("#lname").val("");
+            $("#email").val("");
+            $("#password").val("");
+            $("#isAdmin").prop('checked', false);
+        } else {
+            selectedUserId = user.id;
+            $("#exampleModalLabel").html("Change Password");
+            $("#id").val(user.id);
+            $("#lname").val(user.name);
+            $("#lname").prop("readonly", true);
+            $("#email").val(user.email);
+            $("#email").prop("readonly", true);
+            $("#password").val("");
+        }
+
+        $('#exampleModal').modal().show();
+    }
+
+    function addUser() {
+        var id = $("#id").val();
+        var name = $("#lname").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var isAdmin = $("#isAdmin").val();
+        var api = "";
+        if (selectedUserId == 0) {
+            api = rootPath + '/create';
+        } else {
+            api = rootPath + '/' + selectedUserId;
+        }
+        console.log(api);
+        var payload = {id: id, username: name, name: name, email: email, isAdmin: isAdmin, password: password};
+        if (email == 'undefined' || email.length == 0 || password == 'undefined' || password.length == 0) {
+            alert('Mandatory fields should not be empty');
+        } else {
+            $.ajax({
+                type: selectedUserId == 0 ? "POST" : "PUT",
+                url: api,
+                data: JSON.stringify(payload),
+                headers: {'Authorization': 'Bearer ' + user_info.token},
+                contentType: 'application/json',
+                error: function (res) {
+                    alert(JSON.stringify(res));
+                },
+                success: function (res) {
+                    var msg = selectedUserId == 0 ? 'User Created Successfully' : 'User Updated Successfully';
+                    alert(msg);
+                    $("#exampleModal").modal('hide');
+                    getAllUser();
+                }
+
+            });
+        }
+    }
+
+
+    function saveUser(btn) {
+        var data = dt.row($(btn).parents('tr')).data();
+        var id = data[0];
+        var name = data[2];
+        var email = data[3];
+        var user = {id: id, name: name, email: email};
+        showModal(user);
+    }
+
+    function removeUser(btn) {
+        var data = dt.row($(btn).parents('tr')).data();
+        var id = data[0];
+        if (data != null && data[3] == 'admin@abc.com') {
+            alert('Admin User is not deletable');
+            return;
+        }
+        var api = rootPath + '/' + id;
+        if (window.confirm('Are you sure to delete user?')) {
+            $.ajax({
+                type: "DELETE",
+                url: api,
+                headers: {'Authorization': 'Bearer ' + user_info.token},
+                contentType: 'application/json',
+                error: function (res) {
+                    console.log(JSON.stringify(res));
+                    alert(JSON.stringify(res));
+                },
+                success: function (res) {
+                    alert('User Deleted Successfully');
+                    getAllUser();
+                }
+            });
+        }
+    }
+
+
+    function getAllUser() {
+        var editBtn = '<button type="button" class="btn btn-success save" onclick="saveUser(this)">Edit</button>';
+        var removeBtn = '<button type="button" class="btn btn-danger remove" onclick="removeUser(this)">Remove</button>';
+
+        var api = rootPath + '/all';
+
+        $.ajax({
+            type: "GET",
+            url: api,
+            headers: {'Authorization': 'Bearer ' + user_info.token},
+            contentType: 'application/json',
+            error: function (res) {
+                alert(JSON.stringify(res));
+            },
+            success: function (res) {
+                var dataSet = [];
+                var i = 1;
+                $.each(res.content, function (k, v) {
+                    var arr = [];
+                    arr.push(v.id);
+                    arr.push(i++);
+                    arr.push(v.name);
+                    arr.push(v.email);
+                    arr.push(editBtn + ' ' + removeBtn);
+                    dataSet.push(arr);
+                });
+
+                userList = dataSet;
+
+                $('#resultContainer').empty();
+                $('<table id="example" class="table table-striped table-bordered table-sm" width="100%"></table>').appendTo('#resultContainer');
+                dt = $('#example').DataTable({
+
+                    data: dataSet,
+                    columns: [
+                        {title: "Id"},
+                        {title: "Serial Number"},
+                        {title: "Name"},
+                        {title: "Email"},
+                        {title: "Actions"}
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        }
+                    ]
+                });
+            }
+
+        });
+    }
+
+
+    function logout() {
+        window.localStorage.removeItem('user_info');
+        window.location = 'index.html';
+    }
+</script>
+
+
+</body>
+
+</html>

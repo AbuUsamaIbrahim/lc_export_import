@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="lc" pageWidth="594" pageHeight="739" columnWidth="594" leftMargin="0" rightMargin="0" topMargin="0"
+              bottomMargin="0" uuid="b1c6dd07-575f-4107-baca-1123ec66aa81">
+    <property name="ireport.zoom" value="1.5"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="144"/>
+    <property name="ireport.background.image.properties" value="true,true,0.25,-8,-8,0,0,1889,2440"/>
+    <parameter name="sales_id" class="java.lang.Long"/>
+    <parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+    <parameter name="IMAGE_DIR" class="java.lang.String"/>
+    <parameter name="amount" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="amountInWords" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[SELECT
+s.id,
+   DATE_FORMAT(s.pi_date,'%d/%m/%Y')pi_date,
+   s.proforma_invoice_no,
+   s.invoice_no,
+   s.county,
+   s.loading_place,
+   s.place_of_discharge,
+   s.partial_shipment,
+    s.lc_no,
+    DATE_FORMAT(s.lc_date,'%d/%m/%Y')lc_date,
+    s.export_lc_no,
+    DATE_FORMAT(s.date,'%d/%m/%Y')date,
+    b.name bank_name,
+    s.lc_branch,
+    c.name cust_name,
+    c.address,s.tin_no,s.vat_no
+FROM
+    lc_rest.sale s,
+    lc_rest.customer c,
+    lc_rest.bank b
+WHERE
+    s.customer_id = c.id
+        AND s.lc_bank_id = b.id
+and s.id=$P{sales_id}]]>
+    </queryString>
+    <field name="id" class="java.lang.Long">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="pi_date" class="java.lang.String"/>
+    <field name="proforma_invoice_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="invoice_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="county" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="loading_place" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="place_of_discharge" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="partial_shipment" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_date" class="java.lang.String"/>
+    <field name="export_lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="date" class="java.lang.String"/>
+    <field name="bank_name" class="java.lang.String"/>
+    <field name="lc_branch" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="cust_name" class="java.lang.String"/>
+    <field name="address" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="tin_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="vat_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <background>
+        <band height="50"/>
+    </background>
+    <detail>
+        <band height="739" splitType="Stretch">
+            <image scaleImage="FillFrame">
+                <reportElement x="0" y="0" width="594" height="739" uuid="1e0ba29a-478d-4764-9b1a-9e3dfd3460b1"/>
+                <imageExpression><![CDATA[$P{IMAGE_DIR}+File.separator+"v-card-02.jpg"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="38" y="486" width="188" height="14" uuid="f6b65ef2-b5c7-405f-adf2-d8eb9d4265d0"/>
+                <box>
+                    <bottomPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="10" isBold="true" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Authorized Signature]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="38" y="112" width="515" height="29" uuid="46ac9e2f-9527-4084-bce0-0c4b63ee67de"/>
+                <box>
+                    <bottomPen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Certificate Of Origin]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="38" y="163" width="515" height="273" uuid="9f061876-f216-4f6a-aef6-42b90c54d4b4"/>
+                <textElement textAlignment="Justified" verticalAlignment="Top">
+                    <font fontName="SansSerif" size="12" isBold="true" isItalic="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["We do hereby, declare that the goods we have supplied ( Garment Accessories for 100% Export oriented Garments Industries ) As per our commercial Invoice. The goods we have supplies to, "+($F{cust_name}==null?"JEANS Corp And  Asociate":$F{cust_name})+" , "+($F{address}==null?"Mirpur 11, DHAKA":$F{address})+" , Ref. NO. "+
+$F{proforma_invoice_no}+" Date : "+$F{pi_date}+" value US $"+($P{amount}==null?"123456":$P{amount})+
+" , ( "+($P{amountInWords}==null?"Sixty nine thousand Two hundres only":$P{amountInWords})+" only ) "+"against BB L/C NO. "+($F{lc_no}==null?"123456":$F{lc_no})+
+" , Date : "+($F{lc_date}==null?"Sixty nine thousand Two hundres only":$F{lc_date})+" Export L/C No - "+($F{export_lc_no}==null?" Export Lc1234":$F{export_lc_no})+" of Bangladeah origin."]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

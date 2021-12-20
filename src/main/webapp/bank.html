@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LC Export Import</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/datepicker.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<header>
+    <div class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="logo t-center">
+                        <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="user-welcome-part float-right d-flex">
+                        <p id="pUser">Hello, User</p>
+                        <form action="">
+                            <a href="#" onclick="logout()" class="btn btn-primary btn-sm">Log Out</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-menu"></div>
+</header>
+<!-- Header-Area-End
+    ================================= -->
+<main>
+    <div class="dashboard-area">
+        <div class="container-fluid" style="padding-left:0; padding-right:0;">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+                    <div class="dashboard-left-area">
+                        <div class="dashboard-nav">
+                            <div id="myDIV">
+                                <ul>
+                                    <li class="dbbtn dbactive">
+                                        <a href="bank.html"><i class="fa fa-bank"></i>
+                                            Bank</a>
+                                    </li>
+                                    <li class="dbbtn">
+                                        <a href="branch.html"><i class="fas fa-bank"></i>
+                                            Branch</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="customer.html"><i class="fa fa-user"></i>
+                                            Customer</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="goods.html"><i class="fa fa-product-hunt"></i>
+                                            Goods</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="sales.html"><i class="fa fa-shopping-cart"></i>
+                                            Sales</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="reports.html"><i class="fa fa-file-archive"></i>
+                                            Reports</a>
+                                    </li>
+                                    <li class="dbbtn">
+                                        <a href="manage-users.html"><i class="fas fa-user-tie"></i>
+                                            Manage Users</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">-->
+                <!--          <div class="right-side-dashboard-content">-->
+                <!--            <div class="dashboard-content">-->
+                <!--              <div class="single-dashboard-content">-->
+                <!--                <div class="query-cotent">-->
+                <div class="container">
+                    <div class="query-date-area">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 style="color: #000; margin-bottom: 20px; margin-top: 10px;">Bank Managment</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" onclick="showModal(null)">
+                                    Add New
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="resultContainer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--          </div>-->
+            <!--        </div>-->
+            <!--      </div>-->
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Bank</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <row>
+                            <div class="col-md-12">
+                                <div class="manage-user-popup-form">
+                                    <form action="" method="POST">
+                                        <input type="hidden" id="id">
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    <span>Bank Name</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" id="bname" class="form-control"
+                                                               placeholder="Enter Bank Name">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </row>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="saveBank();">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer>
+    <div class="d-flex justify-content-center" style=" padding-top: 33px;">Developed By, Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">All Rights Reserved and Copyright © 2018 by Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">Web: www.pacificsoft-tech.com</div>
+</footer>
+
+
+<script src="assets/js/jquery-1.12.4.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-datepicker.js"></script>
+<script src="assets/js/jquery.meanmenu.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="assets/js/customjs/common.js"></script>
+<script src="assets/js/customjs/bank.js"></script>
+
+</body>
+
+</html>

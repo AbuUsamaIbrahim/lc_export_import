@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LC Export Import</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/datepicker.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/daterangepicker.css">
+    <link rel="stylesheet" href="assets/css/searchableDropdown.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+
+        .customDesign td, th {
+            padding: 1em;
+            border: 2px solid gray;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .customDesign td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .customDesign tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        .remove {
+            background-color: Red;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+
+        }
+
+        /* Darker background on mouse-over */
+        .remove:hover {
+            background-color: Red;
+        }
+
+        .delete {
+            background-color: Red;
+            border: none;
+            color: white;
+            padding: 4px 4px;
+            font-size: 10px;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        /* Darker background on mouse-over */
+        .delete:hover {
+            background-color: Red;
+        }
+    </style>
+    <style>
+        #myTable {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #myTable td, #myTable th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #myTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #myTable tr:hover {
+            background-color: #ddd;
+        }
+
+        #myTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<header>
+    <div class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="logo t-center">
+                        <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="user-welcome-part float-right d-flex">
+                        <p id="pUser">Hello, User</p>
+                        <form action="">
+                            <a href="#" onclick="logout()" class="btn btn-primary btn-sm">Log Out</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-menu"></div>
+</header>
+<!-- Header-Area-End
+    ================================= -->
+<main>
+    <div class="dashboard-area">
+        <div class="container-fluid" style="padding-left:0; padding-right:0;">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+                    <div class="dashboard-left-area">
+                        <div class="dashboard-nav">
+                            <div id="myDIV">
+                                <ul>
+                                    <li class="dbbtn dbactive">
+                                        <a href="bank.html"><i class="fa fa-bank"></i>
+                                            Bank</a>
+                                    </li>
+                                    <li class="dbbtn">
+                                        <a href="branch.html"><i class="fas fa-bank"></i>
+                                            Branch</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="customer.html"><i class="fa fa-user"></i>
+                                            Customer</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="goods.html"><i class="fa fa-product-hunt"></i>
+                                            Goods</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="sales.html"><i class="fa fa-shopping-cart"></i>
+                                            Sales</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="reports.html"><i class="fa fa-file-archive"></i>
+                                            Reports</a>
+                                    </li>
+                                    <li class="dbbtn">
+                                        <a href="manage-users.html"><i class="fas fa-user-tie"></i>
+                                            Manage Users</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">-->
+                <!--          <div class="right-side-dashboard-content">-->
+                <!--            <div class="dashboard-content">-->
+                <!--              <div class="single-dashboard-content">-->
+                <!--                <div class="query-cotent">-->
+                <div class="container">
+                    <div class="query-date-area">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 style="color: #000; margin-bottom: 20px; margin-top: 10px;">Sales Managment</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <!--Input Field Start from here-->
+
+                            <div class="container">
+                                <row>
+                                    <div class="col-md-12">
+                                        <div class="manage-user-popup-form">
+                                            <form action="" method="POST" id="form_date">
+                                                <input type="hidden" id="id">
+
+                                                <div class="form-group row">
+                                                    <label for="proformaInvoiceNo" class="col-sm-2 col-form-label">Performa
+                                                        Invoice No.</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" name="proformaInvoiceNo"
+                                                               onblur="getAllByPerforma(this.value)"
+                                                               class="form-control" id="proformaInvoiceNo">
+                                                    </div>
+                                                    <label for="piDate" class="col-sm-1 col-form-label">PI Date</label>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" name="piDate" autocomplete="off"
+                                                               class="form-control" id="piDate">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="purchaserName" class="col-sm-2 col-form-label">Purchaser
+                                                        Name</label>
+                                                    <div class="col-sm-4">
+                                                        <input name="customer" class="form-control" id="purchaserName"/>
+
+
+                                                    </div>
+                                                    <label for="bankName" class="col-sm-2 col-form-label">Purchaser
+                                                        Address</label>
+                                                    <div class="col-sm-4">
+                                                        <input name="purchaserAddress" class="form-control"
+                                                               id="purchaserAddress"/>
+
+
+                                                        <!--<select class="fstdropdown-select" id="bankName">-->
+                                                        <!--<option value="">Select Bank</option>-->
+                                                        <!--</select>-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="bankName" class="col-sm-2 col-form-label">Advising Bank
+                                                        Name</label>
+                                                    <div class="col-sm-4">
+                                                        <input name="lcBank" class="form-control" id="bankName"
+                                                               onchange="getBranchByBank(this.value)"/>
+
+
+                                                        <!--<select class="fstdropdown-select" id="bankName">-->
+                                                        <!--<option value="">Select Bank</option>-->
+                                                        <!--</select>-->
+                                                    </div>
+                                                    <label for="bankName" class="col-sm-2 col-form-label">Advising
+                                                        Branch
+                                                    </label>
+                                                    <div class="col-sm-4">
+                                                        <input name="advisingBranch" class="form-control"
+                                                               id="advisingBranch"/>
+
+
+                                                        <!--<select class="fstdropdown-select" id="bankName">-->
+                                                        <!--<option value="">Select Bank</option>-->
+                                                        <!--</select>-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="lcBankName" class="col-sm-2 col-form-label">LC Bank
+                                                        Name</label>
+                                                    <div class="col-sm-4">
+                                                        <input name="lcBankName" class="form-control text-capitalize"
+                                                               id="lcBankName" onchange="getBranchByBank(this.value)"/>
+
+
+                                                    </div>
+                                                    <label for="lcBankName" class="col-sm-2 col-form-label">LC Branch
+                                                    </label>
+                                                    <div class="col-sm-4">
+                                                        <input name="lcBranch" class="form-control text-capitalize"
+                                                               id="lcBranch"/>
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="element" id="div_id1">
+                                                    <div class="border border-secondary">
+                                                        <br>
+                                                        <div class="form-group row">
+                                                            <input name="goodsId" type="hidden" id="goodsId">
+                                                            <label for="goodsDesc" class="col-sm-2 col-form-label">Goods
+                                                                Desc.</label>
+                                                            <div class="col-sm-8">
+                                                                <input class="form-control" id="goodsDesc"
+                                                                       name="goodsDesc"
+                                                                       onchange="goodsDate(this.value,this.id)"/>
+
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <button type="button"
+                                                                        class="add123" id="tableBtn">Add More
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="goodQuantity"
+                                                                   class="col-sm-2 col-form-label">Quantity</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control"
+                                                                       id="goodQuantity" name="goodQuantity">
+                                                            </div>
+                                                            <label for="goodsUnitPrice"
+                                                                   class="col-sm-2 col-form-label">Unit
+                                                                Price</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control"
+                                                                       id="goodsUnitPrice" name="goodsUnitPrice">
+                                                            </div>
+                                                            <label for="goodsUnit"
+                                                                   class="col-sm-2 col-form-label">Unit</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control"
+                                                                       id="goodsUnit" name="goodsUnit">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="goodPackOrMarks"
+                                                                   class="col-sm-2 col-form-label">Pack
+                                                                / Marks</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control"
+                                                                       id="goodPackOrMarks" name="goodPackOrMarks">
+                                                            </div>
+
+                                                            <label for="goodsAmount"
+                                                                   class="col-sm-2 col-form-label">Total
+                                                                Amount</label>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control"
+                                                                       id="goodsAmount">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+                                                    <div class="border border-secondary" style="width: 100%">
+                                                        <table id="myTable" class="customDesign">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td style="display:none;">Serial No</td>
+                                                                <td>Description</td>
+                                                                <td>Quantity</td>
+                                                                <td>Unit Price</td>
+                                                                <td>Unit</td>
+                                                                <td>Total Amount</td>
+                                                                <td>Pack / Marks</td>
+                                                                <td>Action</td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group row">
+
+                                                    <label for="goodsAmount"
+                                                           class="col-sm-6 col-form-label">Total
+                                                        Amount</label>
+                                                    <div class="col-sm-2">
+                                                        <input style="margin-left: 50%;" name="totalAmount" readonly
+                                                               type="text" class="form-control"
+                                                               id="goodsTotalAmount">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="billOfExcDate" class="col-sm-2 col-form-label">Bill of
+                                                        Exchange Date.</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="exchangeDate" type="text" autocomplete="off"
+                                                               class="form-control " id="billOfExcDate">
+                                                    </div>
+                                                    <label for="piDate" class="col-sm-1 col-form-label">LC Days</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="lcDays" type="text" class="form-control"
+                                                               id="lcDays">
+                                                    </div>
+                                                    <label for="piDate" class="col-sm-2 col-form-label">LC No</label>
+                                                    <div class="col-sm-3">
+                                                        <input name="lcNo" type="text" class="form-control" id="lcNo">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+
+                                                    <label for="billOfExcDate" class="col-sm-2 col-form-label">LC
+                                                        Date.</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="lcDate" type="text" autocomplete="off"
+                                                               class="form-control " id="lcDate">
+                                                    </div>
+
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Country of
+                                                        Origin</label>
+                                                    <div class="col-sm-3">
+                                                        <input name="county" type="text" class="form-control"
+                                                               id="countryOrigin">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Export LC
+                                                        No.</label>
+                                                    <div class="col-sm-10">
+                                                        <input name="exportLcNo" type="text" class="form-control"
+                                                               id="expLcNo">
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Place of
+                                                        Loading</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="loadingPlace" type="text" class="form-control"
+                                                               id="placePfLanding">
+                                                    </div>
+
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Place of
+                                                        Discharge</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="placeOfDischarge" type="text" class="form-control"
+                                                               id="placeOdDischarge">
+                                                    </div>
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Final
+                                                        Destination</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="finalDestination" type="text" class="form-control"
+                                                               id="finalDestination">
+                                                    </div>
+                                                </div>
+                                                <!--<div class="form-group row">-->
+                                                <!--&lt;!&ndash;<label for="piDate" class="col-sm-2 col-form-label">LC Open&ndash;&gt;-->
+                                                <!--&lt;!&ndash;Days</label>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<div class="col-sm-2">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<input name="lcOpenDays" type="text" class="form-control"&ndash;&gt;-->
+                                                <!--&lt;!&ndash;id="lcOpenDays">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                                <!--<label for="billOfExcDate" class="col-sm-2 col-form-label">Payment-->
+                                                <!--At Days</label>-->
+                                                <!--<div class="col-sm-2">-->
+                                                <!--<input name="paymentDays" type="text" class="form-control"-->
+                                                <!--id="paymentAtDays">-->
+                                                <!--</div>-->
+
+
+                                                <!--</div>-->
+                                                <div class="form-group row">
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Chalan
+                                                        No.</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="challanNo" type="text" class="form-control"
+                                                               id="chalanNo">
+                                                    </div>
+                                                    <label for="billOfExcDate" class="col-sm-2 col-form-label">Chalan
+                                                        Date</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="challanDate" type="text" autocomplete="off"
+                                                               class="form-control " id="chalanDate">
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Truck
+                                                        No.</label>
+                                                    <div class="col-sm-8">
+                                                        <input name="truckNo" type="text" class="form-control"
+                                                               id="truckNo">
+                                                    </div>
+
+
+                                                    <!--<label for="piDate" class="col-sm-2 col-form-label">Vat No.</label>-->
+                                                    <!--<div class="col-sm-2">-->
+                                                    <!--<input name="vatNo" type="text" class="form-control" id="vatNo">-->
+                                                    <!--</div>-->
+                                                </div>
+                                                <div class="form-group row">
+
+
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Truck Chalan
+                                                        Serial No.</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="truckChallanSerialNo" type="text"
+                                                               class="form-control"
+                                                               id="truckChalanSerialNo">
+                                                    </div>
+                                                    <label for="billOfExcDate" class="col-sm-2 col-form-label">Truck
+                                                        Chalan Date</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="truckChallanDate" type="text" autocomplete="off"
+                                                               class="form-control" id="truckChalanDate">
+                                                    </div>
+                                                    <label for="billOfExcDate" class="col-sm-2 col-form-label">Partial
+                                                        Shipment</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="partialShipment" type="text" class="form-control"
+                                                               id="partialShipment">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <!--<label for="piDate" class="col-sm-2 col-form-label">Tin No.</label>-->
+                                                    <!--<div class="col-sm-2">-->
+                                                    <!--<input name="tinNo" type="text" class="form-control" id="tinNo">-->
+                                                    <!--</div>-->
+                                                    <label for="billOfExcDate" class="col-sm-2 col-form-label">Mode Of
+                                                        Shipment</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="shipmentMode" type="text" class="form-control"
+                                                               id="modeOfShipment">
+
+                                                    </div>
+                                                    <label for="billOfExcDate" class="col-sm-2 col-form-label">Invoice
+                                                        No.</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="invoiceNo" type="text" class="form-control"
+                                                               id="invoiceNo">
+
+                                                    </div>
+                                                    <label for="piDate" class="col-sm-2 col-form-label">Date</label>
+                                                    <div class="col-sm-2">
+                                                        <input name="date" type="text" autocomplete="off"
+                                                               class="form-control " id="date">
+                                                    </div>
+                                                </div>
+                                                <!--<div class="form-group row">-->
+
+                                                <!---->
+                                                <!---->
+                                                <!--&lt;!&ndash;<label for="termsOfPayment" class="col-sm-2 col-form-label">Terms Of&ndash;&gt;-->
+                                                <!--&lt;!&ndash;Payment</label>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<div class="col-sm-2">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<input name="termsOfPayment" type="text" class="form-control"&ndash;&gt;-->
+                                                <!--&lt;!&ndash;id="termsOfPayment">&ndash;&gt;-->
+
+                                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                                <!--</div>-->
+
+                                                <!--<div class="form-group row">-->
+
+                                                <!--<label for="piDate" class="col-sm-3 col-form-label">Shipment within-->
+                                                <!--Days</label>-->
+                                                <!--<div class="col-sm-3">-->
+                                                <!--<input name="shipmentWithinDays" type="text"-->
+                                                <!--class="form-control" id="shipmentWithinDays">-->
+                                                <!--</div>-->
+                                                <!--</div>-->
+                                                <div id="mainBtn">
+                                                    <button type="button" class="btn btn-primary" value="createNew"
+                                                            onclick="saveSales(this.value);">Save
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary"
+                                                            onclick="refreshForm();">Refresh
+                                                    </button>
+                                                </div>
+                                                <div id="afterUpdateBtn">
+                                                    <button type="button" class="btn btn-primary" value="createNew"
+                                                            onclick="saveSales(this.value);">Create New
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" value="update"
+                                                            onclick="saveSales(this.value);">Only Update
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary"
+                                                            onclick="refreshForm();">Refresh
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <br>
+                                            <input type="text" id="searchValue" onkeyup="getVal(this.value,this.id)"
+                                                   placeholder="Search.." autocomplete="off">
+                                            <br>
+                                            <div class="form-group row">
+                                                <div class="border border-secondary" style="width: 100%">
+                                                    <table id="myTable2" class="customDesign">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td style="display:none;">Id</td>
+                                                            <td>Serial No</td>
+                                                            <td>Performa Invoice</td>
+                                                            <td>Performa Date</td>
+                                                            <td>Action</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </row>
+                            </div>
+                            <!--</div>-->
+                            <!--<div class="modal-footer">-->
+                            <!--<button type="button" class="btn btn-primary" onclick="saveSales();">Save</button>-->
+                            <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>-->
+                            <!--</div>-->
+
+
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--          </div>-->
+            <!--        </div>-->
+            <!--      </div>-->
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!-- Modal -->
+    <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"-->
+    <!--aria-hidden="true">-->
+    <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content">-->
+    <!--<div class="modal-header">-->
+    <!--<h5 class="modal-title" id="exampleModalLabel">Add Goods</h5>-->
+    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+    <!--<span aria-hidden="true">&times;</span>-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--<div class="modal-body">-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+</main>
+<footer>
+    <div class="d-flex justify-content-center" style=" padding-top: 33px;">Developed By, Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">All Rights Reserved and Copyright © 2018 by Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">Web: www.pacificsoft-tech.com</div>
+</footer>
+
+<script>
+    $('.select2').select2();
+</script>
+
+<script src="assets/js/jquery-1.12.4.min.js"></script>
+<!--<script src="assets/js/jquery-3.1.1.min.js"></script>-->
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/searchableDropdown.js"></script>
+<script src="assets/js/bignumber.js/bignumber.js"></script>
+<!--<script src="assets/js/bootstrap-datepicker.js"></script>-->
+
+
+<script src="assets/js/jquery.meanmenu.min.js"></script>
+<script src="assets/js/moment.js"></script>
+<script src="assets/js/daterangepicker.js"></script>
+<script src="assets/js/pdfmake.min.js"></script>
+<script src="assets/js/vfs_kalpurush.js"></script>
+<script src="assets/js/vfs_fonts.js"></script>
+<script src="assets/js/jquery.dataTables.js"></script>
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/buttons.flash.min.js"></script>
+
+<script src="assets/js/customjs/common.js"></script>
+<script src="assets/js/customjs/sales.js"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</body>
+
+</html>

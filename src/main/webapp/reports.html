@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LC Export Import</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/datepicker.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .button {
+            display: block;
+            width: 115px;
+            height: 25px;
+            background: #4E9CAF;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 25px;
+        }
+    </style>
+    <style>
+        td, th {
+            padding: 1em;
+            border: 2px solid gray;
+        }
+
+        td:first-child, th:first-child {
+            display: none;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        .remove {
+            background-color: Red;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+
+        }
+
+        /* Darker background on mouse-over */
+        .remove:hover {
+            background-color: Red;
+        }
+
+        .delete {
+            background-color: Red;
+            border: none;
+            color: white;
+            padding: 4px 4px;
+            font-size: 10px;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+
+        /* Darker background on mouse-over */
+        .delete:hover {
+            background-color: Red;
+        }
+    </style>
+</head>
+
+<header>
+    <div class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="logo t-center">
+                        <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="user-welcome-part float-right d-flex">
+                        <p id="pUser">Hello, User</p>
+                        <form action="">
+                            <a href="#" onclick="logout()" class="btn btn-primary btn-sm">Log Out</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-menu"></div>
+</header>
+<!-- Header-Area-End
+    ================================= -->
+<main>
+    <div class="dashboard-area">
+        <div class="container-fluid" style="padding-left:0; padding-right:0;">
+            <div class="row no-gutters">
+                <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+                    <div class="dashboard-left-area">
+                        <div class="dashboard-nav">
+                            <div id="myDIV">
+                                <ul>
+                                    <li class="dbbtn dbactive">
+                                        <a href="bank.html"><i class="fa fa-bank"></i>
+                                            Bank</a>
+                                    </li>
+                                    <li class="dbbtn">
+                                        <a href="branch.html"><i class="fas fa-bank"></i>
+                                            Branch</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="customer.html"><i class="fa fa-user"></i>
+                                            Customer</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="goods.html"><i class="fa fa-product-hunt"></i>
+                                            Goods</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="sales.html"><i class="fa fa-shopping-cart"></i>
+                                            Sales</a>
+                                    </li>
+                                    <li class="dbbtn ">
+                                        <a href="reports.html"><i class="fa fa-file-archive"></i>
+                                            Reports</a>
+                                    </li>
+                                    <li class="dbbtn">
+                                        <a href="manage-users.html"><i class="fas fa-user-tie"></i>
+                                            Manage Users</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">-->
+                <!--          <div class="right-side-dashboard-content">-->
+                <!--            <div class="dashboard-content">-->
+                <!--              <div class="single-dashboard-content">-->
+                <!--                <div class="query-cotent">-->
+                <div class="container">
+                    <div class="query-date-area">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 style="color: #000; margin-bottom: 20px; margin-top: 10px;">Reports Managment</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Button trigger modal -->
+                                <!--<button type="button" class="btn btn-primary" onclick="showModal(null)">-->
+                                <!--Add New-->
+                                <!--</button>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="padding-left: 83%;
+    padding-bottom: 1%;">
+                                <div class="form-group row">
+                                    <input type="text" id="searchValue" onkeyup="getAllSales(this.value,this.id)"
+                                           placeholder="Search.." autocomplete="off">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div class="form-group row">
+                                    <div class="border border-secondary" style="width: 100%">
+                                        <table id="myTable2">
+                                            <tbody>
+                                            <tr>
+                                                <td>Id</td>
+                                                <td>Serial No</td>
+                                                <td>Performa Invoice</td>
+                                                <td>Performa Date</td>
+                                                <td>Action</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--          </div>-->
+            <!--        </div>-->
+            <!--      </div>-->
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Application Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <row>
+                            <div class="col-md-12">
+                                <div class="manage-user-popup-form">
+                                    <form action="" method="POST">
+                                        <input type="hidden" id="id">
+                                        <table>
+                                            <tr>
+                                                <th>
+                                                    <span>Bank Name</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="salesId">
+                                                        <input type="text" id="bname" class="form-control"
+                                                               placeholder="Enter Bank Name">
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <span>Branch Name</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" id="branchName" class="form-control"
+                                                               placeholder="Enter Branch Name">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <span>Bank Address</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" id="address" class="form-control"
+                                                               placeholder="Enter Address ">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    <span>Bank Account</span>
+                                                </th>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" id="account" class="form-control"
+                                                               placeholder="Enter Account No. ">
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </row>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="downloadReport();">Download</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<footer>
+    <div class="d-flex justify-content-center" style=" padding-top: 33px;">Developed By, Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">All Rights Reserved and Copyright © 2018 by Pacific Soft-Tech Ltd.</div>
+
+    <div class="d-flex justify-content-center">Web: www.pacificsoft-tech.com</div>
+</footer>
+
+
+<script src="assets/js/jquery-1.12.4.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap-datepicker.js"></script>
+<script src="assets/js/jquery.meanmenu.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script src="assets/js/customjs/common.js"></script>
+<script src="assets/js/customjs/reports.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Base64/1.1.0/base64.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="lc" pageWidth="594" pageHeight="739" columnWidth="594" leftMargin="0" rightMargin="0" topMargin="0"
+              bottomMargin="0" uuid="b1c6dd07-575f-4107-baca-1123ec66aa81">
+    <property name="ireport.zoom" value="1.6500000000000004"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <property name="ireport.background.image.properties" value="true,true,0.25,-8,-8,0,0,1889,2440"/>
+    <parameter name="sales_id" class="java.lang.Long">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="IMAGE_DIR" class="java.lang.String"/>
+    <parameter name="SUBREPORT_DIR" class="java.lang.String">
+        <defaultValueExpression><![CDATA["C:\\Users\\IICT\\Documents\\LC Reports\\"]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[SELECT
+s.id,
+   DATE_FORMAT(s.pi_date,'%d/%m/%Y')pi_date,
+   s.proforma_invoice_no,
+   s.invoice_no,
+   s.county,
+   s.loading_place,
+   s.place_of_discharge,
+   s.partial_shipment,
+    s.lc_no,s.lc_days,
+    DATE_FORMAT(s.lc_date,'%d/%m/%Y')lc_date,
+    s.export_lc_no,
+   DATE_FORMAT(s.date,'%d/%m/%Y')date,
+    b.name bank_name,
+    s.lc_branch,
+    c.name cust_name,
+    c.address,s.terms_of_payment,s.final_destination,s.shipment_mode
+FROM
+    lc_rest.sale s,
+    lc_rest.customer c,
+    lc_rest.bank b
+WHERE
+    s.customer_id = c.id
+        AND s.lc_bank_id = b.id
+and s.id=$P{sales_id}]]>
+    </queryString>
+    <field name="id" class="java.lang.Long">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="pi_date" class="java.lang.String"/>
+    <field name="proforma_invoice_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="invoice_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="county" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="loading_place" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="place_of_discharge" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="partial_shipment" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_days" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_date" class="java.lang.String"/>
+    <field name="export_lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="date" class="java.lang.String"/>
+    <field name="bank_name" class="java.lang.String"/>
+    <field name="lc_branch" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="cust_name" class="java.lang.String"/>
+    <field name="address" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="terms_of_payment" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="final_destination" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="shipment_mode" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <background>
+        <band height="50"/>
+    </background>
+    <detail>
+        <band height="739" splitType="Stretch">
+            <image>
+                <reportElement x="0" y="0" width="594" height="739" uuid="e61c536c-2917-496d-9f7a-59e183d10a81"/>
+                <imageExpression><![CDATA[$P{IMAGE_DIR}+File.separator+"v-card-02.jpg"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="38" y="161" width="77" height="16" uuid="7a637064-5fd9-48a8-9488-fcd1c6c7261b"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[LC No.]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="115" y="160" width="164" height="16" uuid="5f8038e7-43f0-4107-9f5b-4e2c44884ab5"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+($F{lc_no}==null?" ":$F{lc_no})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="38" y="193" width="77" height="16" uuid="710a398d-837d-4038-ab83-030f2263e478"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Consignee/Buyer]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="115" y="193" width="164" height="16" uuid="e102ae61-362a-4493-b590-038a1f453053"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+($F{cust_name}==null?" ":$F{cust_name})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="38" y="278" width="448" height="42" uuid="cc20c8a6-aee2-4bd5-9068-e18bf7bd2051"/>
+                <box leftPadding="5">
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Notify - "+$F{bank_name}+" , "+$F{lc_branch}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="38" y="145" width="77" height="16" uuid="fd2df678-654a-42e3-ada2-19e1e9289bda"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="115" y="145" width="164" height="16" uuid="b664a96d-d7ab-452d-9188-2189f9771d44"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+($F{date}==null?" ":$F{date})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="38" y="129" width="77" height="16" uuid="8eb92d2c-4fec-4815-aa47-8cc38b4064b5"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Invoice No.]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="145" width="202" height="16" uuid="20c8e9bd-f433-448d-a450-ebd32193aada"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+($F{pi_date}==null?" ":$F{pi_date})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="115" y="129" width="164" height="16" uuid="4050b2b6-5bea-4f0a-92f0-69c8be2fcebc"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+($F{invoice_no}==null?" ":$F{invoice_no})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="283" y="145" width="89" height="16" uuid="8e49a5ae-b24b-48c0-bf21-9ef6dacf8c40"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="283" y="161" width="89" height="16" uuid="3a524fd9-c5a1-4e24-81c1-6b867ed483f5"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Country of Origin]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="161" width="202" height="16" uuid="d8f9a65a-6c70-4bfe-a761-bb0be045163a"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+($F{county}==null?" ":$F{county})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="283" y="193" width="89" height="16" uuid="3384a034-c2b4-4e40-99b9-14a220c9305a"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Place of Loading]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="193" width="202" height="16" uuid="d580ae17-104b-456f-82a9-7659bf3a39b6"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[" : "+($F{loading_place}==null?" ":$F{loading_place})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="283" y="241" width="89" height="16" uuid="3831e055-6bd8-4336-b097-a9886384ca72"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Place of Discharge]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="241" width="202" height="16" uuid="96e8f6bd-668b-4a07-8809-135f4232ffb5"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[" : "+($F{place_of_discharge}==null?" ":$F{place_of_discharge})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="283" y="129" width="89" height="16" uuid="71b8c580-9fdb-40cb-b91c-ca8b90245e05"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Order No.]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="129" width="202" height="16" uuid="5881a96a-4a8d-4bbe-b26a-5f3af32201c4"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[" : "+($F{proforma_invoice_no}==null?" ":$F{proforma_invoice_no})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="177" width="141" height="16" uuid="1f19966f-681d-423a-9662-cd141e84256f"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[" : At "+($F{lc_days}==null?" ":$F{lc_days})+" Days Sight"]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="283" y="177" width="89" height="16" uuid="79306c0a-1dbb-47e8-b71e-f6ff0f36d1f4"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Terms of Payment]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="210" width="202" height="16" uuid="bb8e0b4c-49e6-4098-b4ff-ae4b5d9a44c1"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[" : "+($F{final_destination}==null?" ":$F{final_destination})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="283" y="210" width="89" height="16" uuid="6d74827f-9fb2-41e1-9ec8-9d5b76d6fc7a"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Final Destination]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="372" y="226" width="202" height="16" uuid="cfae6e53-e959-471a-a69a-d07eb267f076"/>
+                <box>
+                    <rightPen lineWidth="0.25"/>
+                </box>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA[" : "+($F{shipment_mode}==null?" ":$F{shipment_mode})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="283" y="226" width="89" height="16" uuid="6e79210a-5469-4358-a7e5-9f499c753aba"/>
+                <box leftPadding="2"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Mode of Shipment]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="115" y="177" width="164" height="16" uuid="4042f272-25c4-45de-a412-6c17c9ba3911"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+($F{lc_date}==null?" ":$F{lc_date})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="38" y="177" width="77" height="16" uuid="fbfad6b6-ded1-4cd0-9fe0-9d57b25faf2c"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Date                       : ]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="38" y="209" width="241" height="69" uuid="d625b60c-f23c-41df-93c2-61d0df3cfb20"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Address : "+($F{address}==null?" ":$F{address})]]></textFieldExpression>
+            </textField>
+            <subreport>
+                <reportElement x="38" y="320" width="448" height="100" uuid="e11e10d5-ba25-436b-a3e7-2a4262c256ef"/>
+                <subreportParameter name="sales_id">
+                    <subreportParameterExpression><![CDATA[$P{sales_id}]]></subreportParameterExpression>
+                </subreportParameter>
+                <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                <subreportExpression>
+                    <![CDATA[$P{SUBREPORT_DIR} +File.separator+"packingList_subreport1.jasper"]]></subreportExpression>
+            </subreport>
+            <staticText>
+                <reportElement x="408" y="656" width="121" height="17" uuid="1528a64f-12a0-4482-8ff2-18b5f445afbf"/>
+                <box leftPadding="5">
+                    <topPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font isBold="false"/>
+                </textElement>
+                <text><![CDATA[FOR & ON BEHALF OF ]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="38" y="534" width="448" height="90" uuid="1cc3e721-a37f-4464-9812-b90ecd9377a5"/>
+                <box leftPadding="2">
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <paragraph leftIndent="2" rightIndent="2"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA["Export L/C NO : "+($F{export_lc_no}==null?" ":$F{export_lc_no})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="38" y="320" width="63" height="214" uuid="459ff7a0-c641-4b8e-9f9d-3b00de0dd46c"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="38" y="320" width="448" height="214" uuid="d995cf65-5895-4a94-8271-029c06354cd0"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="101" y="320" width="285" height="214" uuid="209c2850-2df7-437a-8068-698046cf9509"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="372" y="673" width="202" height="17" uuid="1c815719-341d-4a61-93d1-8039d183cc37"/>
+                <box leftPadding="5">
+                    <topPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Bayzeed Printing & Packaging Industries]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="229" y="97" width="147" height="26" uuid="5659150c-c7f1-4dd5-b1f0-ca63d096af1b"/>
+                <box>
+                    <bottomPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14"/>
+                </textElement>
+                <text><![CDATA[Packing List]]></text>
+            </staticText>
+        </band>
+    </detail>
+</jasperReport>

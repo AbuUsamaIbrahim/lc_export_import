@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="lc" pageWidth="594" pageHeight="739" columnWidth="594" leftMargin="0" rightMargin="0" topMargin="0"
+              bottomMargin="0" uuid="b1c6dd07-575f-4107-baca-1123ec66aa81">
+    <property name="ireport.zoom" value="1.5"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="96"/>
+    <property name="ireport.background.image.properties" value="true,true,0.25,-8,-8,0,0,1889,2440"/>
+    <parameter name="sales_id" class="java.lang.Long">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="SUBREPORT_DIR" class="java.lang.String">
+        <defaultValueExpression><![CDATA["C:\\Users\\IICT\\Documents\\LC Reports\\"]]></defaultValueExpression>
+    </parameter>
+    <parameter name="IMAGE_DIR" class="java.lang.String"/>
+    <parameter name="bank" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="branch" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="address" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="account" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="amount" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="amountInWords" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[SELECT
+s.id,
+
+    s.lc_no,
+    DATE_FORMAT(s.lc_date,'%d/%m/%Y')lc_date,
+    s.export_lc_no,
+    DATE_FORMAT(s.date,'%d/%m/%Y')date,
+    b.name bank_name,
+    s.lc_branch,
+    c.name cust_name,
+    c.address
+FROM
+    lc_rest.sale s,
+    lc_rest.customer c,
+    lc_rest.bank b
+WHERE
+    s.customer_id = c.id
+        AND s.lc_bank_id = b.id
+and s.id=$P{sales_id}]]>
+    </queryString>
+    <field name="id" class="java.lang.Long">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_date" class="java.lang.String"/>
+    <field name="export_lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="date" class="java.lang.String"/>
+    <field name="bank_name" class="java.lang.String"/>
+    <field name="lc_branch" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="cust_name" class="java.lang.String"/>
+    <field name="address" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <detail>
+        <band height="739" splitType="Stretch">
+            <image>
+                <reportElement x="0" y="0" width="594" height="739" uuid="e6dafefa-ff7d-481b-9fe7-360b6ff39de1"/>
+                <imageExpression><![CDATA[$P{IMAGE_DIR}+File.separator+"v-card-02.jpg"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="419" y="618" width="121" height="17" uuid="22c16932-7395-4cac-bf0f-c91bdf4f8ca1"/>
+                <box leftPadding="5">
+                    <topPen lineWidth="0.25"/>
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="false"/>
+                </textElement>
+                <text><![CDATA[Authorized Signature]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-720" y="222" width="51" height="207" uuid="6838727d-d48f-4437-a3a6-8b3193692aca"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-720" y="222" width="51" height="207" uuid="d6a3ef79-c2e9-408e-b58f-8a199145a5a5"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="-720" y="222" width="51" height="207" uuid="21c9be71-cd3b-42ef-9bd1-f54f92c4924b"/>
+                <box>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <text><![CDATA[]]></text>
+            </staticText>
+            <image>
+                <reportElement x="47" y="103" width="553" height="480" uuid="e1e6d044-10db-4789-9b93-6f8f36e19119"/>
+                <imageExpression><![CDATA[$P{IMAGE_DIR}+File.separator+"application.png"]]></imageExpression>
+            </image>
+            <textField>
+                <reportElement x="87" y="243" width="475" height="26" uuid="48b3510f-1cb2-4bcd-a268-3f7a59e6105c"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA["Subject : Submission of bill for collection / negotiation against L/C No. "+$F{lc_no}+" Dt. "+$F{lc_date}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="87" y="293" width="437" height="74" uuid="09bac777-1774-44f0-be4d-fefc590acd39"/>
+                <textElement textAlignment="Justified">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA["With due respect As per bill for US $ " +$P{amount}+" (US $ " +$P{amountInWords}+") only along with necessary papers are submitted for your necessary action and after the bill payment we would like to request you to Realize payment against  bill Amount transfer to on Current Account No. " +$P{account}+ " Of your branch."]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="87" y="186" width="100" height="12" uuid="39884e84-281f-4c0a-9f54-cdedf7e920c9"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{bank}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="87" y="203" width="100" height="12" uuid="674b86c4-8bdc-4e62-b452-9dd62e56d2ce"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{branch}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="87" y="220" width="100" height="12" uuid="e0aad9a0-c728-46fc-a20a-6a357552162f"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="87" y="269" width="100" height="20" uuid="1e997298-e098-4709-a4d1-50bf411e9c58"/>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Dear Sir,]]></text>
+            </staticText>
+        </band>
+    </detail>
+</jasperReport>

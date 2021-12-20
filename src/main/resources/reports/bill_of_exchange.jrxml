@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="lc" pageWidth="594" pageHeight="739" columnWidth="594" leftMargin="0" rightMargin="0" topMargin="0"
+              bottomMargin="0" uuid="b1c6dd07-575f-4107-baca-1123ec66aa81">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="663"/>
+    <property name="ireport.background.image.properties" value="true,true,0.25,-8,-8,0,0,1889,2440"/>
+    <parameter name="sales_id" class="java.lang.Long"/>
+    <parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+    <parameter name="IMAGE_DIR" class="java.lang.String"/>
+    <parameter name="amount" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="amountInWords" class="java.lang.String">
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <queryString>
+        <![CDATA[SELECT
+s.id,
+   DATE_FORMAT(s.pi_date,'%d/%m/%Y') pi_date ,
+   s.proforma_invoice_no,
+   s.invoice_no,
+   s.county,DATE_FORMAT(s.exchange_date,'%d/%m/%Y')exchange_date,
+   s.loading_place,
+   s.place_of_discharge,
+   s.partial_shipment,
+    s.lc_no,s.lc_days,
+   DATE_FORMAT( s.lc_date,'%d/%m/%Y')lc_date,
+    s.export_lc_no,
+     DATE_FORMAT( s.date,'%d/%m/%Y')date,
+    b.name bank_name,
+(select b.name from lc_rest.bank b where b.id = s.advising_bank_id) advising_bank,
+    s.lc_branch,s.advising_branch,
+    c.name cust_name,
+    c.address,s.tin_no,s.vat_no,s.terms_of_payment
+FROM
+    lc_rest.sale s,
+    lc_rest.customer c,
+    lc_rest.bank b
+WHERE
+    s.customer_id = c.id
+        AND s.lc_bank_id = b.id
+and s.id=$P{sales_id}]]>
+    </queryString>
+    <field name="id" class="java.lang.Long">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="pi_date" class="java.lang.String"/>
+    <field name="proforma_invoice_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="invoice_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="county" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="exchange_date" class="java.lang.String"/>
+    <field name="loading_place" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="place_of_discharge" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="partial_shipment" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_days" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="lc_date" class="java.lang.String"/>
+    <field name="export_lc_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="date" class="java.lang.String"/>
+    <field name="bank_name" class="java.lang.String"/>
+    <field name="advising_bank" class="java.lang.String"/>
+    <field name="lc_branch" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="advising_branch" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="cust_name" class="java.lang.String"/>
+    <field name="address" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="tin_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="vat_no" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="terms_of_payment" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <background>
+        <band height="50"/>
+    </background>
+    <detail>
+        <band height="739" splitType="Stretch">
+            <image scaleImage="FillFrame">
+                <reportElement x="0" y="0" width="594" height="739" uuid="1e0ba29a-478d-4764-9b1a-9e3dfd3460b1"/>
+                <imageExpression><![CDATA[$P{IMAGE_DIR}+File.separator+"v-card-02.jpg"]]></imageExpression>
+            </image>
+            <ellipse>
+                <reportElement x="261" y="327" width="52" height="43" uuid="02177ffe-b647-4876-b6d2-b9ac5a8b4f75"/>
+            </ellipse>
+            <ellipse>
+                <reportElement x="261" y="669" width="52" height="43" uuid="e2183862-5672-4a05-9ebb-d4612d3305a7"/>
+            </ellipse>
+            <staticText>
+                <reportElement x="261" y="666" width="52" height="43" uuid="99792590-4060-4792-8a99-147ab4cd2145"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="24"/>
+                </textElement>
+                <text><![CDATA[2]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="37" y="190" width="66" height="14" uuid="7a637064-5fd9-48a8-9488-fcd1c6c7261b"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Exchange for]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="105" y="191" width="141" height="14" uuid="5f8038e7-43f0-4107-9f5b-4e2c44884ab5"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" US $ "+$P{amount}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="38" y="220" width="533" height="14" uuid="cc20c8a6-aee2-4bd5-9068-e18bf7bd2051"/>
+                <box leftPadding="0">
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["to the order of   "+$F{advising_bank}+" , "+$F{advising_branch}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="375" y="190" width="150" height="14" uuid="20c8e9bd-f433-448d-a450-ebd32193aada"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+$F{exchange_date}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="321" y="190" width="54" height="14" uuid="8e49a5ae-b24b-48c0-bf21-9ef6dacf8c40"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Dhaka the]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="177" y="566" width="386" height="14" uuid="7e26b23c-b614-46a0-a6a9-461d34c98b6e"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$P{amountInWords}+" Only"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="37" y="248" width="557" height="14" uuid="c746acc1-bd54-410c-9e47-ff54d50f7805"/>
+                <box leftPadding="0">
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["L/C No : "+($F{lc_no}==null?"Test LC 123":$F{lc_no})+" Date : "+($F{lc_date}==null?"1/2/2020":$F{lc_date})+" & P.I No :"+($F{proforma_invoice_no}==null?"PI 1234ATC":$F{proforma_invoice_no})+" Date : "+($F{pi_date}==null?"1/1/2020":$F{pi_date})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="38" y="262" width="556" height="26" uuid="3882575e-9e21-4663-aa5e-eb618e13231c"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA["For value received : "+($F{bank_name}==null?"ABC BANK LTD":$F{bank_name})+" , "+($F{lc_branch}==null?"ABC BANK BRANCH":$F{lc_branch})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="38" y="288" width="556" height="26" uuid="b1c3adc2-2d89-46f9-a6a6-3802aaa9ee33"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["Of "+($F{cust_name}==null?"JEANS Corp And  Asociate":$F{cust_name})+" , "+($F{address}==null?"Mirpur 11, DHAKA":$F{address})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="375" y="338" width="188" height="14" uuid="f6b65ef2-b5c7-405f-adf2-d8eb9d4265d0"/>
+                <box>
+                    <bottomPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[BAYJEED PRINTING & PACKAGING INDUSTRIES]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="37" y="143" width="526" height="47" uuid="0b742b63-edc5-4b1d-a213-553e605e673b"/>
+                <box rightPadding="0">
+                    <topPen lineWidth="0.75"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["Export L/C No : "+($F{export_lc_no}==null?"Export Lc1234":$F{export_lc_no})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="38" y="114" width="525" height="29" uuid="46ac9e2f-9527-4084-bce0-0c4b63ee67de"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18"/>
+                </textElement>
+                <text><![CDATA[Bill Of Exchange]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="365" y="669" width="188" height="14" uuid="f630a65b-d0ba-4e47-a53a-7c64afc8b2c5"/>
+                <box>
+                    <bottomPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[BAYJEED PRINTING & PACKAGING INDUSTRIES]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="262" y="327" width="51" height="43" uuid="f14689f8-7e6c-43ab-87d7-8866e261c911"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="24"/>
+                </textElement>
+                <text><![CDATA[1]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="48" y="629" width="546" height="27" uuid="eef02b28-29a9-4d75-aafd-bee203fc62e1"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["Of "+($F{cust_name}==null?"JEANS Corp And  Asociate":$F{cust_name})+" , "+($F{address}==null?"Mirpur 11, DHAKA":$F{address})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="48" y="594" width="546" height="35" uuid="1e33a143-ea0d-4b10-87fc-20a0fbfc117f"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["For value received :  "+($F{bank_name}==null?"ABC BANK LTD":$F{bank_name})+" , "+($F{lc_branch}==null?"ABC BANK BRANCH":$F{lc_branch})]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="47" y="580" width="516" height="14" uuid="25a2ffb0-f045-43f0-b49b-ac6d10f9c653"/>
+                <box leftPadding="0">
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["L/C No : "+($F{lc_no}==null?"Test LC 123":$F{lc_no})+" Date : "+($F{lc_date}==null?"1/2/2020":$F{lc_date})+" & P.I No :"+($F{proforma_invoice_no}==null?"PI 1234ATC":$F{proforma_invoice_no})+" Date : "+($F{pi_date}==null?"1/1/2020":$F{pi_date})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="48" y="566" width="129" height="14" uuid="2e716f56-c038-4e5f-8d8b-6339ceb38878"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[The sum of :  US Dollar]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="48" y="552" width="518" height="14" uuid="59716fda-14e7-4b9c-af77-f662fe76217e"/>
+                <box leftPadding="0">
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["to the order of   "+$F{advising_bank}+" , "+$F{advising_branch}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="47" y="524" width="66" height="14" uuid="32fdb1a8-2461-4bf2-81d2-e867ce8c8f26"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Exchange for]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="114" y="524" width="141" height="14" uuid="d5412fdb-8d00-4d34-b924-aa3c56349d3c"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" US $ "+$P{amount}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="423" y="524" width="54" height="14" uuid="18a46907-42a6-441d-9d34-eecb0e1f189c"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Dhaka the]]></text>
+            </staticText>
+            <textField isBlankWhenNull="true">
+                <reportElement x="477" y="504" width="89" height="14" uuid="1fd344a3-fd08-4fdd-bb16-9081f1b0cf3c"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[" : "+$F{exchange_date}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="27" y="475" width="526" height="49" uuid="537d08ce-09a2-47f8-b34d-ee8fffca33f6"/>
+                <box rightPadding="0">
+                    <topPen lineWidth="0.75"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isStrikeThrough="false"/>
+                </textElement>
+                <textFieldExpression>
+                    <![CDATA["Export L/C No : "+($F{export_lc_no}==null? "Export Lc1234":$F{export_lc_no})]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="27" y="446" width="525" height="29" uuid="84784dd7-89a7-48c1-b2d5-00020b3c961a"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="18"/>
+                </textElement>
+                <text><![CDATA[Bill Of Exchange]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="10" y="400" width="556" height="14" uuid="a6d80163-ce2e-4a21-b056-e11791414861"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[BAYJEED PRINTING & PACKAGING INDUSTRIES]]></text>
+            </staticText>
+            <elementGroup/>
+            <textField isBlankWhenNull="true">
+                <reportElement x="48" y="538" width="518" height="14" uuid="ff90b9f2-90c9-478d-be1d-5cbf62bc88f7"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["All   "+($F{lc_days}==null?" ":$F{lc_days})+" Days  sigth of this first exchange ( First of the same tenor & date being unpaid ) pay "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="37" y="206" width="534" height="14" uuid="0765b9fa-d71b-4fd2-bceb-46a6c8a1217c"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression>
+                    <![CDATA["All   "+($F{lc_days}==null?" ":$F{lc_days})+" Days  sigth of this first exchange ( Second of the same tenor & date being unpaid ) pay "]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="38" y="234" width="533" height="14" uuid="72d415e3-a4ee-46d3-9879-43ec5a4ef8c8"/>
+                <textFieldExpression><![CDATA["The sum of :  US Dollar "+$P{amountInWords}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="15" y="719" width="556" height="14" uuid="aca03a49-51dc-41ea-8659-152ef74fffd4"/>
+                <box>
+                    <topPen lineWidth="0.25"/>
+                    <bottomPen lineWidth="0.25"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[BAYJEED PRINTING & PACKAGING INDUSTRIES]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="365" y="689" width="77" height="14" uuid="a5e546af-5453-413b-938d-74f550be5115"/>
+                <box>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[For and on behalf]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="375" y="356" width="89" height="14" uuid="d50a5f13-4e0b-4083-9b52-116ec9d2a913"/>
+                <box>
+                    <bottomPen lineWidth="0.0"/>
+                </box>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[For and on behalf]]></text>
+            </staticText>
+        </band>
+    </detail>
+</jasperReport>
